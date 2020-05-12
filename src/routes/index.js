@@ -2,7 +2,22 @@ const router = require('koa-router')()
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
-    title: 'Hello Koa 2!'
+    title: 'Hello Koa 2!',
+    isMe: true,
+    blogList: [
+      {
+        id: 1,
+        title: '111'
+      },
+      {
+        id: 2,
+        title: 'ccc'
+      },
+      {
+        id: 3,
+        title: 'ddd'
+      }
+    ]
   })
 })
 
@@ -17,18 +32,18 @@ router.get('/json', async (ctx, next) => {
 })
 
 
-router.get('/profile/:userName',async (ctx,next) =>{
-  const {userName} = ctx.params
+router.get('/profile/:userName', async (ctx, next) => {
+  const { userName } = ctx.params
   ctx.body = {
-    title:"this is profile page",
+    title: "this is profile page",
     userName
   }
 })
 
-router.get('/loadMore/:userName/:pageIndex',(ctx,next)=>{
-  const {userName,pageIndex} = ctx.params
+router.get('/loadMore/:userName/:pageIndex', (ctx, next) => {
+  const { userName, pageIndex } = ctx.params
   ctx.body = {
-    title:"this is loadMore API",
+    title: "this is loadMore API",
     userName,
     pageIndex
   }
