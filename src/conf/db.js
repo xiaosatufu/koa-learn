@@ -8,7 +8,7 @@ let REDIS_CONF = {
 let MYSQL_CONF = {
     host: 'localhost',
     user: 'root',
-    passowrd: 'xiaosatutu',
+    password: 'xiaosatufu',
     port: '3306',
     database: 'koa-weibo-db'
 }
