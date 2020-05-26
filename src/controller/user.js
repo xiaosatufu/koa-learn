@@ -8,13 +8,16 @@ const { SuccessModel, ErrorModel } = require('../model/ResModel')
 
 const {
     registerUserNameNotExistInfo,
-    // registerUserNameExistInfo,
-    // registerFailInfo,
-    // loginFailInfo,
-    // deleteUserFailInfo,
-    // changeInfoFailInfo,
-    // changePasswordFailInfo
+    registerUserNameExistInfo,
+    registerFailInfo,
+    loginFailInfo,
+    deleteUserFailInfo,
+    changeInfoFailInfo,
+    changePasswordFailInfo
 } = require('../model/ErrorInfo')
+
+
+const doCrypto = require('../utils/cryp')
 
 
 async function isExist(userName) {
@@ -34,7 +37,7 @@ async function register({ userName, password, gender }) {
     try {
         await createUser({
             userName,
-            password,
+            password: doCrypto(password),
             gender
         })
         return new SuccessModel()
@@ -44,10 +47,24 @@ async function register({ userName, password, gender }) {
     }
 }
 
+async function login(ctx, userName, password) {
+    const userInfo = await getUserInfo(userName, doCrypto(password))
+    if (!userInfo) {
+        return new ErrorModel(loginFailInfo)
+    }
+
+    if (ctx.session.userInfo == null) {
+        ctx.session.userInfo = userInfo
+    }
+    return new SuccessModel()
+}
+
+
 
 
 
 module.exports = {
     isExist,
-    register
+    register,
+    login
 }

@@ -31,16 +31,18 @@
                 userName,
                 password
             }, function (err, data) {
-                console.log(err)
-                console.log(data)
-                // if (err) {
-                //     alert(err)
-                //     return
-                // }
-                // // 跳转到指定 url 或首页
-                // var redirectUrl = $.query.get('url') || '/'
-                // console.log(redirectUrl)
-                // location.href = redirectUrl
+
+                // console.log(err)
+                // console.log(data)
+                // console.log(errno)
+                if (err) {
+                    alert(err)
+                    return
+                }
+                // 跳转到指定 url 或首页
+                var redirectUrl = $.query.get('url') || '/'
+                console.log(redirectUrl)
+                location.href = redirectUrl
             })
         })
     })
